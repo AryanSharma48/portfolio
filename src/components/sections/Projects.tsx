@@ -11,13 +11,13 @@ export default function Projects() {
   return (
     <section 
       ref={containerRef}
-      className="relative w-full py-32 px-4 md:px-12 lg:px-24 border-t border-accent/10"
+      className="relative w-full py-16 md:py-32 px-4 md:px-12 lg:px-24 border-t border-accent/10"
       id="projects"
     >
-      <h2 className="font-sans text-xs uppercase tracking-widest text-accent mb-24">
+      <h2 className="font-sans text-xs uppercase tracking-widest text-accent mb-12 md:mb-24">
         (02) Selected Works
       </h2>
-      <div className="flex flex-col gap-32 md:gap-48">
+      <div className="flex flex-col gap-16 md:gap-32 lg:gap-48">
         {portfolioData.projects.map((project, i) => (
           <ProjectCard key={project.id} project={project} index={i} />
         ))}

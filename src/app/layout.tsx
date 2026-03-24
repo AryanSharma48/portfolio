@@ -13,7 +13,7 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "Aryan | Creative Developer",
+  title: "Aryan | FullStack Developer",
   description: "High-performance developer portfolio built with Next.js & Framer Motion",
 };
 

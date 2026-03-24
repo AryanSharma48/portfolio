@@ -5,11 +5,11 @@ import { portfolioData } from "@/data/portfolio";
 
 export default function Contact() {
   return (
-    <section className="relative w-full min-h-screen flex flex-col justify-center px-4 md:px-12 lg:px-24 py-32 border-t border-accent/10 overflow-hidden" id="contact">
+    <section className="relative w-full min-h-[80vh] md:min-h-screen flex flex-col justify-center px-4 md:px-12 lg:px-24 py-16 md:py-32 border-t border-accent/10 overflow-hidden" id="contact">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end w-full max-w-7xl mx-auto z-10">
         
-        <div className="mb-24 md:mb-0">
-          <h2 className="font-sans text-xs uppercase tracking-widest text-accent mb-12">
+        <div className="mb-16 md:mb-0">
+          <h2 className="font-sans text-xs uppercase tracking-widest text-accent mb-8 md:mb-12">
             (03) The Index
           </h2>
           <div className="flex flex-col gap-2 relative z-20">

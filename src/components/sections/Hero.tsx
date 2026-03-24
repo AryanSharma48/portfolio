@@ -33,12 +33,30 @@ export default function Hero() {
         </p>
       </motion.div>
 
-      {/* Profile Image Element */}
+      {/* Mobile Background Image Element */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.4 }}
+        transition={{ duration: 2 }}
+        className="absolute inset-0 w-full h-full z-0 block md:hidden pointer-events-none brightness-60 mix-blend-luminosity"
+      >
+        <Image 
+          src="/profile.jpg" 
+          alt="Background Texture" 
+          fill 
+          className="object-cover object-center grayscale"
+          priority
+        />
+        {/* Falloff gradient overlay to blend into the darkness smoothly */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80" />
+      </motion.div>
+
+      {/* Desktop Profile Image Element */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
         animate={{ opacity: 1, scale: 1, rotate: 0 }}
         transition={{ delay: 0.5, duration: 1.5, type: "spring" }}
-        className="absolute top-[15%] right-[5%] w-[35vh] h-[45vh] lg:w-[40vh] lg:h-[50vh] border-[1px] border-accent/20 hidden md:block overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 pointer-events-auto z-10"
+        className="absolute top-[15%] right-[5%] w-[35vh] h-[45vh] lg:w-[40vh] lg:h-[50vh] border-[1px] border-accent/20 hidden md:block overflow-hidden pointer-events-auto z-10"
         data-cursor-hover
       >
         <Image 

@@ -16,7 +16,7 @@ export default function About() {
   return (
     <section 
       ref={containerRef}
-      className="min-h-screen w-full flex flex-col justify-center px-4 md:px-12 lg:px-24 py-24 border-t border-accent/10"
+      className="min-h-[80vh] md:min-h-screen w-full flex flex-col justify-center px-4 md:px-12 lg:px-24 py-12 md:py-24 border-t border-accent/10"
       id="about"
     >
       <div className="max-w-[90vw] lg:max-w-[70vw]">
