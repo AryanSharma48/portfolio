@@ -3,11 +3,11 @@ export const portfolioData = {
     name: "Aryan",
     role: "Creative Developer",
     bio: "I build high-performance web applications with a focus on deep aesthetics, fluid motion, and unapologetic minimalism. No templates. Just craft.",
-    email: "hello@aryansharma.com",
+    email: "aryansharma24106@gmail.com",
     socials: [
       { label: "X", url: "https://twitter.com/aryansharma" },
-      { label: "Github", url: "https://github.com/aryansharma" },
-      { label: "LinkedIn", url: "https://linkedin.com/in/aryansharma" }
+      { label: "Github", url: "https://github.com/AryanSharma48" },
+      { label: "LinkedIn", url: "https://linkedin.com/in/aryansharma24" }
     ]
   },
   skills: [

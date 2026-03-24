@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Hero() {
   return (
@@ -14,7 +15,7 @@ export default function Hero() {
         <h1 className="font-display text-[15vw] leading-[0.85] tracking-tighter uppercase font-bold mix-blend-difference z-20">
           ARYAN
           <br />
-          <span className="text-transparent" style={{ WebkitTextStroke: "1px #fafafa", color: "transparent" }}>
+          <span className="text-transparent" style={{ WebkitTextStroke: "2px var(--color-accent)", color: "transparent"}}>
             SHARMA
           </span>
         </h1>
@@ -32,13 +33,22 @@ export default function Hero() {
         </p>
       </motion.div>
 
-      {/* Abstract geometry element to break the silence */}
+      {/* Profile Image Element */}
       <motion.div
-        initial={{ scale: 0, rotate: -45 }}
-        animate={{ scale: 1, rotate: 0 }}
+        initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
+        animate={{ opacity: 1, scale: 1, rotate: 0 }}
         transition={{ delay: 0.5, duration: 1.5, type: "spring" }}
-        className="absolute top-[15%] right-[5%] w-[40vh] h-[40vh] border-[1px] border-accent/20 pointer-events-none hidden md:block"
-      />
+        className="absolute top-[15%] right-[5%] w-[35vh] h-[45vh] lg:w-[40vh] lg:h-[50vh] border-[1px] border-accent/20 hidden md:block overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 pointer-events-auto z-10"
+        data-cursor-hover
+      >
+        <Image 
+          src="/profile.jpg" 
+          alt="Aryan Sharma" 
+          fill 
+          className="object-cover scale-105 hover:scale-100 transition-transform duration-700"
+          priority
+        />
+      </motion.div>
     </section>
   );
 }

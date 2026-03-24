@@ -7,7 +7,7 @@ import Contact from "@/components/sections/Contact";
 
 export default function Home() {
   return (
-    <main className="relative w-full bg-background selection:bg-accent selection:text-black">
+    <main className="relative w-full selection:bg-accent selection:text-black">
       <CustomCursor />
       <ScrollProgress />
       <Hero />

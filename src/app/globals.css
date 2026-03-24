@@ -13,6 +13,10 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 50px 50px;
     @apply selection:bg-accent selection:text-black;
   }
 }
@@ -21,4 +25,9 @@
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent;
+}
+
+/* Force hide Next.js dev tools overlay */
+nextjs-portal {
+  display: none !important;
 }
