@@ -36,9 +36,9 @@ export default function Hero() {
       {/* Mobile Background Image Element */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.4 }}
+        animate={{ opacity: 0.2 }}
         transition={{ duration: 2 }}
-        className="absolute inset-0 w-full h-full z-0 block md:hidden pointer-events-none brightness-60 mix-blend-luminosity"
+        className="absolute inset-0 w-full h-full z-0 block md:hidden pointer-events-none brightness-50 mix-blend-luminosity"
       >
         <Image 
           src="/profile.jpg" 

@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aryan Sharma | Creative Developer Portfolio
 
-## Getting Started
+A high-performance, minimalist developer portfolio built with Next.js 15, React 19, Tailwind CSS v4, and Framer Motion. 
+Designed with a brutalist, strictly typography-driven aesthetic, avoiding standard SaaS template layouts.
 
-First, run the development server:
+## 🚀 Live Demo
+*https://codingaryan.vercel.app/*
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🛠 Tech Stack
+- **Framework:** Next.js 15 (App Router, Turbopack, Static Export)
+- **Styling:** Tailwind CSS v4 (CSS-first architecture)
+- **Animations:** Framer Motion (Scroll reveal, Parallax, Magnetic interactions)
+- **Typography:** Syne (Headings) & Inter (Body)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Features
+- **Magnetic Physics Cursor:** Custom built high-performance cursor with dynamic hover states.
+- **Scroll Physics:** Framer Motion `useScroll` transforms hooked into project parallax cards.
+- **Dynamic Grid Background:** CSS mask-injected geometric mesh grid for premium aesthetic.
+- **Staggered Typography:** Custom FlipLink character-by-character cascade animations.
+- **100% Static Export:** Highly optimized for edge delivery with zero server overhead.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 💻 Local Development
+1. Clone the repository: `git clone https://github.com/AryanSharma48/portfolio.git`
+2. Install dependencies: `npm install`
+3. Start the development server: `npm run dev`
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📝 Content Management
+All portfolio content (bio, skills, projects, and contact info) is strictly typed and centralized in `src/data/portfolio.ts` for instant editing without the overhead of maintaining a database.

@@ -56,12 +56,12 @@ const ProjectCard = ({ project, index }: { project: ProjectType, index: number }
             src={project.image} 
             alt={project.title}
             fill
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 filter grayscale group-hover:grayscale-0"
+            className="object-cover transition-transform duration-700 ease-out md:group-hover:scale-105 filter md:grayscale group-hover:grayscale-0"
           />
         </motion.div>
         
         {/* Overlay Block for Brutalist feel */}
-        <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500 pointer-events-none" />
+        <div className="absolute inset-0 bg-transparent md:bg-black/40 md:group-hover:bg-transparent transition-colors duration-500 pointer-events-none" />
       </motion.div>
 
       <motion.div 
