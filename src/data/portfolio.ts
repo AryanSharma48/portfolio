@@ -5,7 +5,7 @@ export const portfolioData = {
     bio: "I build high-performance web applications with a focus on deep aesthetics, fluid motion, and unapologetic minimalism. No templates. Just craft.",
     email: "aryansharma24106@gmail.com",
     socials: [
-      { label: "X", url: "https://twitter.com/aryansharma" },
+      { label: "X", url: "https://x.com/Aryan27417343" },
       { label: "Github", url: "https://github.com/AryanSharma48" },
       { label: "LinkedIn", url: "https://linkedin.com/in/aryansharma24" }
     ]

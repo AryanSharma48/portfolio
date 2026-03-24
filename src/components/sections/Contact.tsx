@@ -14,17 +14,9 @@ export default function Contact() {
           </h2>
           <div className="flex flex-col gap-2 relative z-20">
             {portfolioData.skills.map((skill, i) => (
-              <motion.span 
-                key={skill}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="font-display text-2xl md:text-3xl lg:text-4xl uppercase text-white/30 hover:text-white transition-colors cursor-default"
-                data-cursor-hover
-              >
+              <FlipText key={skill} delay={i * 0.1}>
                 {skill}
-              </motion.span>
+              </FlipText>
             ))}
           </div>
         </div>
@@ -43,22 +35,11 @@ export default function Contact() {
             TALK.
           </motion.a>
           
-          <div className="flex flex-wrap gap-6 md:gap-8">
+          <div className="flex flex-col items-start md:items-end gap-1 md:gap-2">
             {portfolioData.about.socials.map((s, i) => (
-              <motion.a 
-                key={s.label}
-                href={s.url}
-                target="_blank"
-                rel="noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="font-sans text-xs uppercase tracking-widest text-white/60 hover:text-accent transition-colors"
-                data-cursor-hover
-              >
+              <FlipLink key={s.label} href={s.url} delay={i * 0.1}>
                 {s.label}
-              </motion.a>
+              </FlipLink>
             ))}
           </div>
         </div>
@@ -71,3 +52,78 @@ export default function Contact() {
     </section>
   );
 }
+
+const FlipLink = ({ children, href, delay }: { children: string; href: string; delay: number }) => {
+  return (
+    <motion.a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay }}
+      className="group relative block overflow-hidden whitespace-nowrap font-display text-[8vw] sm:text-5xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter text-white/50 hover:text-accent transition-colors"
+      data-cursor-hover
+    >
+      <div className="flex">
+        {children.split("").map((letter, i) => (
+          <span
+            key={i}
+            className="inline-block transition-transform duration-300 ease-in-out group-hover:-translate-y-[110%]"
+            style={{ transitionDelay: `${i * 25}ms`, lineHeight: 1 }}
+          >
+            {letter === " " ? "\u00A0" : letter}
+          </span>
+        ))}
+      </div>
+      <div className="absolute top-0 left-0 flex">
+        {children.split("").map((letter, i) => (
+          <span
+            key={i}
+            className="inline-block translate-y-[110%] transition-transform duration-300 ease-in-out group-hover:translate-y-0"
+            style={{ transitionDelay: `${i * 25}ms`, lineHeight: 1 }}
+          >
+            {letter === " " ? "\u00A0" : letter}
+          </span>
+        ))}
+      </div>
+    </motion.a>
+  );
+};
+
+const FlipText = ({ children, delay }: { children: string; delay: number }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay }}
+      className="group relative block overflow-hidden whitespace-nowrap font-display text-2xl md:text-3xl lg:text-4xl uppercase text-white/30 hover:text-white transition-colors cursor-default p-[1px]"
+      data-cursor-hover
+    >
+      <div className="flex">
+        {children.split("").map((letter, i) => (
+          <span
+            key={i}
+            className="inline-block transition-transform duration-300 ease-in-out group-hover:-translate-y-[110%]"
+            style={{ transitionDelay: `${i * 25}ms`, lineHeight: 1 }}
+          >
+            {letter === " " ? "\u00A0" : letter}
+          </span>
+        ))}
+      </div>
+      <div className="absolute top-0 left-0 flex">
+        {children.split("").map((letter, i) => (
+          <span
+            key={i}
+            className="inline-block translate-y-[110%] transition-transform duration-300 ease-in-out group-hover:translate-y-0"
+            style={{ transitionDelay: `${i * 25}ms`, lineHeight: 1 }}
+          >
+            {letter === " " ? "\u00A0" : letter}
+          </span>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
