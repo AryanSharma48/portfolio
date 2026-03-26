@@ -15,10 +15,10 @@ export default function Hero() {
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         className="z-10"
       >
-        <h1 className="font-display text-[15vw] leading-[0.85] tracking-tighter uppercase font-bold mix-blend-difference z-20">
+        <h1 className="font-display text-[14vw] md:text-[15vw] leading-[0.85] tracking-tighter uppercase font-bold mix-blend-difference z-20">
           ARYAN
           <br />
-          <span className="text-transparent" style={{ WebkitTextStroke: "2px var(--color-accent)", color: "transparent"}}>
+          <span className="text-transparent" style={{ WebkitTextStroke: "1px var(--color-accent)", color: "transparent"}}>
             SHARMA
           </span>
         </h1>
@@ -28,10 +28,10 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8, duration: 1 }}
-        className="absolute bottom-12 right-12 md:right-24 flex items-end gap-4 z-10"
+        className="absolute bottom-16 right-6 md:bottom-12 md:right-24 flex items-end gap-4 z-10"
       >
-        <div className="w-[1px] h-24 bg-accent origin-bottom opacity-50" />
-        <p className="font-sans text-xs md:text-sm uppercase tracking-widest max-w-[200px]">
+        <div className="w-[1px] h-16 md:h-24 bg-accent origin-bottom opacity-50" />
+        <p className="font-sans text-[10px] md:text-sm uppercase tracking-widest max-w-[150px] md:max-w-[200px]">
           Creative Developer building high-performance systems.
         </p>
       </motion.div>

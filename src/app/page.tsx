@@ -20,7 +20,8 @@ export default function Home() {
 
   // Card lifting transition: starts at 200px offset and catches up quickly
   const cardY = useTransform(scrollY, [0, 100], [10, 0]);
-  const cardBorderRadius = useTransform(scrollY, [0, 300], ["0rem", "3rem"]);
+  // Reduced border radius for better mobile/desktop balance
+  const cardBorderRadius = useTransform(scrollY, [0, 300], ["0rem", "2rem"]);
 
   // Hero fade and scale start immediately
   const heroOpacity = useTransform(scrollY, [0, 500], [1, 0]);

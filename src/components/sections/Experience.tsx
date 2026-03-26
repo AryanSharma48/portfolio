@@ -5,18 +5,41 @@ import { portfolioData } from "@/data/portfolio";
 
 export default function Experience() {
   return (
-    <section className="py-24 px-4 md:px-12 lg:px-24 w-full">
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1 }}
-        className="mb-16"
-      >
-        <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tighter">
-          EXPERIENCE <span className="text-accent">/</span>
-        </h2>
-      </motion.div>
+    <section className="py-12 md:py-32 px-4 md:px-12 lg:px-24 w-full">
+      <div className="mb-16">
+        <motion.h2 
+          initial="hidden"
+          whileInView="visible"
+          className="font-display text-4xl md:text-7xl lg:text-8xl font-bold uppercase tracking-tighter flex flex-wrap"
+        >
+          {"EXPERIENCE".split("").map((char, i) => (
+            <span key={i} className="overflow-hidden inline-block">
+              <motion.span
+                variants={{
+                  hidden: { y: "100%" },
+                  visible: { y: 0 }
+                }}
+                transition={{ 
+                  duration: 0.8, 
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: i * 0.02
+                }}
+                className="inline-block"
+              >
+                {char}
+              </motion.span>
+            </span>
+          ))}
+          <motion.span 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="text-accent animate-pulse ml-4"
+          >
+            /
+          </motion.span>
+        </motion.h2>
+      </div>
 
       <div className="space-y-8">
         {portfolioData.experience.map((exp, index) => (
@@ -26,7 +49,7 @@ export default function Experience() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: index * 0.2 }}
-            className="group relative grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 p-8 md:p-12 rounded-2xl border border-accent/15 bg-[#1a1a1a] hover:bg-[#1e1e1e] hover:border-accent/40 transition-all duration-500 overflow-hidden"
+            className="group relative grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 p-6 md:p-12 rounded-2xl border border-accent/15 bg-[#1a1a1a] hover:bg-[#1e1e1e] hover:border-accent/40 transition-all duration-500 overflow-hidden"
           >
             {/* Left Column: Role & Company */}
             <div className="flex flex-col justify-between h-full">
