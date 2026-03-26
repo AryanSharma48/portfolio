@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
 import { Code2, Braces, Workflow } from "lucide-react";
 
@@ -11,12 +11,18 @@ export default function ScrollingMarquee() {
     offset: ["start end", "end start"]
   });
 
-  // Top line: Left to Right
-  const x1 = useTransform(scrollYProgress, [0, 1], [-500, 50]);
-  // Middle line: Right to Left (Faster)
-  const x2 = useTransform(scrollYProgress, [0, 1], [-700, 0]);
-  // Bottom line: Left to Right (Fastest)
-  const x3 = useTransform(scrollYProgress, [0, 1], [-1000, 100]);
+  // Spring configuration for weightless, smooth motion on mobile
+  const springConfig = { damping: 25, stiffness: 60, restDelta: 0.001 };
+
+  // Raw transforms
+  const rawX1 = useTransform(scrollYProgress, [0, 1], [-500, 0]);
+  const rawX2 = useTransform(scrollYProgress, [0, 1], [-700, 0]);
+  const rawX3 = useTransform(scrollYProgress, [0, 1], [-1000, 100]);
+
+  // Smoothed spring values
+  const x1 = useSpring(rawX1, springConfig);
+  const x2 = useSpring(rawX2, springConfig);
+  const x3 = useSpring(rawX3, springConfig);
 
   const items1 = ["Full Stack Developer", "Full Stack Developer", "Full Stack Developer","Full Stack Developer","Full Stack Developer","Full Stack Developer",];
   const items2 = ["Backend Architect", "Backend Architect", "Backend Architect"];
@@ -24,7 +30,10 @@ export default function ScrollingMarquee() {
 
   // Helper to render repeated items
   const MarqueeRow = ({ items, x, Icon, textColor, baseTranslate = "0%" }: any) => (
-    <motion.div style={{ x }} className={`flex whitespace-nowrap gap-6 md:gap-12 items-center ${baseTranslate}`}>
+    <motion.div
+      style={{ x, willChange: 'transform' }}
+      className={`flex whitespace-nowrap gap-6 md:gap-12 items-center ${baseTranslate}`}
+    >
       {[...Array(60)].map((_, i) => (
         <div key={i} className="flex items-center gap-6 md:gap-12">
           <span className={`text-3xl md:text-5xl lg:text-8xl font-display font-bold transition-all duration-300 tracking-tighter ${textColor}`}>
