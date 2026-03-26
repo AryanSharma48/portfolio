@@ -3,9 +3,12 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+import MeshBackground from "@/components/ui/MeshBackground";
+
 export default function Hero() {
   return (
     <section className="relative h-screen w-full flex flex-col justify-center pl-4 md:pl-12 lg:pl-24 overflow-hidden">
+      <MeshBackground />
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}

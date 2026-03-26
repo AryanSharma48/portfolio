@@ -44,5 +44,27 @@ export const portfolioData = {
       github: "https://github.com/aryansharma/project-3",
       image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop"
     }
+  ],
+  experience: [
+    {
+      company: "Freelance",
+      role: "Freelance Full-Stack Developer",
+      location: "Remote",
+      period: "January 2026 – Present",
+      description: [
+        "Engineered a sales distribution platform for multiple client firms, integrating order management and live salesman tracking that reduced administrative overhead by 40%.",
+        "Architected responsive admin dashboards using React and TypeScript to manage complex partner access controls."
+      ]
+    },
+    {
+      company: "ACM Student Chapter, MUJ",
+      role: "Web Development Junior Committee",
+      location: "Manipal University Jaipur",
+      period: "November 2025 – Present",
+      description: [
+        "Spearheaded the development of 3+ responsive event websites, optimising for heavy traffic.",
+        "Collaborated with a 4-person team to implement new features."
+      ]
+    },
   ]
 };

@@ -4,7 +4,7 @@ A high-performance, minimalist developer portfolio built with Next.js 15, React 
 Designed with a brutalist, strictly typography-driven aesthetic, avoiding standard SaaS template layouts.
 
 ## 🚀 Live Demo
-*https://codingaryan.vercel.app/*
+*https://codingaryan.vercel.app*
 
 ## 🛠 Tech Stack
 - **Framework:** Next.js 15 (App Router, Turbopack, Static Export)
