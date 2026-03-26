@@ -10,22 +10,21 @@ import About from "@/components/sections/About";
 import Projects from "@/components/sections/Projects";
 import Contact from "@/components/sections/Contact";
 import SmoothScroll from "@/components/ui/SmoothScroll";
+import ScrollingMarquee from "@/components/ui/ScrollingMarquee";
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
+  // Use scrollY for more absolute control
+  const { scrollY } = useScroll();
 
-  // Card lifting transition starts immediately
-  const cardY = useTransform(scrollYProgress, [0, 0.12], ["100vh", "0vh"]);
-  const cardBorderRadius = useTransform(scrollYProgress, [0, 0.12], ["0rem", "3rem"]);
+  // Card lifting transition: starts at 200px offset and catches up quickly
+  const cardY = useTransform(scrollY, [0, 100], [10, 0]);
+  const cardBorderRadius = useTransform(scrollY, [0, 300], ["0rem", "3rem"]);
 
-  // Hero fade starts slightly after card starts lifting
-  const heroOpacity = useTransform(scrollYProgress, [0.05, 0.15], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0.05, 0.15], [1, 0.95]); // Subtle "squinting" effect
+  // Hero fade and scale start immediately
+  const heroOpacity = useTransform(scrollY, [0, 500], [1, 0]);
+  const heroScale = useTransform(scrollY, [0, 500], [1, 0.95]);
 
   return (
     <SmoothScroll>
@@ -50,9 +49,10 @@ export default function Home() {
             borderTopLeftRadius: cardBorderRadius,
             borderTopRightRadius: cardBorderRadius,
           }}
-          className="relative z-20 bg-[#1a1a1a] shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-t border-white/5"
+          className="relative z-20 bg-[#202020] shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-t border-white/5"
         >
           <Experience />
+          <ScrollingMarquee />
           <About />
           <Projects />
           <Contact />
