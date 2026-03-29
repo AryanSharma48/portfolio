@@ -13,8 +13,11 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "Aryan | FullStack Developer",
+  title: "Aryan Sharma",
   description: "High-performance developer portfolio built with Next.js & Framer Motion",
+  icons:{
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({

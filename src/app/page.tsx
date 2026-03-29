@@ -20,8 +20,6 @@ export default function Home() {
 
   // Card lifting transition: starts at 200px offset and catches up quickly
   const cardY = useTransform(scrollY, [0, 100], [10, 0]);
-  // Reduced border radius for better mobile/desktop balance
-  const cardBorderRadius = useTransform(scrollY, [0, 300], ["0rem", "2rem"]);
 
   // Hero fade and scale start immediately
   const heroOpacity = useTransform(scrollY, [0, 500], [1, 0]);
@@ -47,8 +45,8 @@ export default function Home() {
         <motion.div
           style={{ 
             y: cardY,
-            borderTopLeftRadius: cardBorderRadius,
-            borderTopRightRadius: cardBorderRadius,
+            borderTopLeftRadius: "3rem",
+            borderTopRightRadius: "3rem",
           }}
           className="relative z-20 bg-[#202020] shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-t border-white/5"
         >
