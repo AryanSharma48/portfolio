@@ -12,9 +12,9 @@ export default function Contact() {
           <h2 className="font-sans text-xs uppercase tracking-widest text-accent mb-8 md:mb-12">
             (03) The Index
           </h2>
-          <div className="flex flex-col gap-2 relative z-20">
+          <div className="columns-1 md:columns-2 gap-x-12 space-y-2 relative z-20">
             {portfolioData.skills.map((skill, i) => (
-              <FlipText key={skill} delay={i * 0.1}>
+              <FlipText key={skill} delay={i * 0.05}>
                 {skill}
               </FlipText>
             ))}

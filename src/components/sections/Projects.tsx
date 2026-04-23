@@ -35,7 +35,7 @@ const ProjectCard = ({ project, index }: { project: ProjectType, index: number }
     offset: ["start end", "end start"]
   });
 
-  const yPos = useTransform(scrollYProgress, [0, 1], [150, -150]);
+  const yPos = useTransform(scrollYProgress, [0, 1], [80, -80]);
   const isEven = index % 2 === 0;
 
   return (
@@ -44,14 +44,14 @@ const ProjectCard = ({ project, index }: { project: ProjectType, index: number }
       className={`relative flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12 lg:gap-24`}
     >
       <motion.div 
-        className="w-full md:w-3/5 group relative overflow-hidden bg-white/5 border border-white/10"
+        className="w-full md:w-3/5 group relative overflow-hidden bg-white/5 border border-white/10 h-[50vh] md:h-[70vh]"
         data-cursor-hover
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <motion.div style={{ y: yPos }} className="w-full h-[50vh] md:h-[70vh] relative scale-[1.3]">
+        <motion.div style={{ y: yPos }} className="absolute inset-[-20%] scale-[1.0]">
           <Image 
             src={project.image} 
             alt={project.title}

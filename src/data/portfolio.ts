@@ -1,8 +1,8 @@
 export const portfolioData = {
   about: {
     name: "Aryan",
-    role: "Creative Developer",
-    bio: "I build high-performance web applications with a focus on deep aesthetics, fluid motion, and unapologetic minimalism. No templates. Just craft.",
+    role: "Full Stack Developer",
+    bio: "Full-stack developer focused on high-concurrency backend systems and AI-driven architecture. I bridge the gap between complex system design and intuitive, production-ready interfaces.",
     email: "aryansharma24106@gmail.com",
     socials: [
       { label: "X", url: "https://x.com/Aryan27417343" },
@@ -11,59 +11,91 @@ export const portfolioData = {
     ]
   },
   skills: [
-    "TypeScript", "React", "Next.js", "Framer Motion", "Tailwind CSS", "Three.js", "WebGL", "Node.js"
+    "Python", "JavaScript", "TypeScript", "C++", "SQL",
+    "React.js", "Tailwind CSS", "HTML", "CSS",
+    "Express.js", "Node.js", "RESTful APIs", "JWT",
+    "MongoDB", "PostgreSQL", "Supabase", "Redis",
+    "Git", "Vercel", "Render", "Firebase"
   ],
   projects: [
     {
       id: "01",
-      title: "Nebula Core",
-      tagline: "E-commerce re-imagined with WebGL.",
-      description: "A headless architectural rebuild of an extensive e-commerce platform using Next.js and Sanity, featuring a seamless, native-app-like cart experience.",
-      tech: ["Next.js", "Framer Motion", "Stripe", "Sanity CMS"],
-      link: "https://example.com/project-1",
-      github: "https://github.com/aryansharma/project-1",
-      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
+      title: "Blytz",
+      tagline: "The high-speed README architect.",
+      description: "A high-speed CLI Tool using Node.js to automate the generation and maintenance of professional project READMEs. Auto-scans, auto-weaves, and auto-maintains professional project docs. Achieved 1000+ downloads in the first week of release. Zero-config CLI + GitHub App.",
+      tech: ["Node.js", "JavaScript", "Octokit", "NPM", "Git"],
+      link: "https://npmjs.com/package/blytz",
+      github: "https://github.com/aryansharma48/blytz",
+      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop"
     },
     {
       id: "02",
-      title: "Aura Syntax",
-      tagline: "SaaS dashboard with absolute restraint.",
-      description: "A brutally minimal financial dashboard built for high-density data parsing. Optimized for speed and absolute readability.",
-      tech: ["React 19", "Tailwind v4", "Zustand"],
-      link: "https://example.com/project-2",
-      github: "https://github.com/aryansharma/project-2",
+      title: "VoteAway",
+      tagline: "Real-time voting at scale.",
+      description: "A real-time voting and leaderboard system for 1,500+ users. High concurrency platform with sub-100ms latency, atomic Redis vote locking, smart polling via SWR, Google OAuth2, and an admin control panel for secure, scalable voting.",
+      tech: ["React", "TypeScript", "Express", "Upstash Redis", "Vercel Serverless", "SWR"],
+      link: "https://voting.mujoneiros.in",
+      github: "https://github.com/aryansharma48/vote-away",
       image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
     },
     {
       id: "03",
-      title: "Haptic Flow",
-      tagline: "Animation-first brand identity.",
-      description: "An experimental brand identity utilizing advanced scroll physics, parallax, and custom cursor interactions to break the conventional web mold.",
-      tech: ["Three.js", "React Three Fiber", "GSAP"],
-      link: "https://example.com/project-3",
-      github: "https://github.com/aryansharma/project-3",
+      title: "Creator Trust",
+      tagline: "AI-powered influencer authenticity.",
+      description: "A full-stack platform to evaluate influencer authenticity and recommend fair pricing using behavioral signals. Built a Random Forest-based scoring system (R² ≈ 0.92, MAE < 3) with feature engineering on engagement rate, comment uniqueness, and growth volatility.",
+      tech: ["React", "TypeScript", "Tailwind CSS", "FastAPI", "Python", "scikit-learn"],
+      link: "https://creator-trust.vercel.app",
+      github: "https://github.com/aryansharma48/creatortrust",
       image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      id: "04",
+      title: "SWAN",
+      tagline: "AI reviewer extension for Amazon.",
+      description: "A Chrome Extension using Google Gemini API to generate concise sentiment summaries from hundreds of Amazon reviews. Features a DOM-based scraping engine to extract product data directly into a browser side panel. Reduced average product research time by an estimated 70% through automated summarization.",
+      tech: ["JavaScript", "Chrome Extensions (Manifest V3)", "DOM Web Scraping", "Gemini API"],
+      link: "https://github.com/aryansharma48/swan-ai-assistant",
+      github: "https://github.com/aryansharma48/swan-ai-assistant",
+      image: "https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?q=80&w=2070&auto=format&fit=crop"
     }
   ],
   experience: [
     {
-      company: "Freelance",
-      role: "Freelance Full-Stack Developer",
-      location: "Remote",
-      period: "January 2026 – Present",
-      description: [
-        "Engineered a sales distribution platform for multiple client firms, integrating order management and live salesman tracking that reduced administrative overhead by 40%.",
-        "Architected responsive admin dashboards using React and TypeScript to manage complex partner access controls."
+      company: "ACM Student Chapter, MUJ",
+      location: "Jaipur, India",
+      roles: [
+        {
+          role: "Technical Head",
+          period: "April 2026 – Present",
+          description: [
+            "Leading technical direction for chapter projects, ensuring structured development practices and scalable system design.",
+            "Collaborating with cross-functional teams to design and implement scalable solutions for chapter-wide use.",
+            "Promoting a project-driven learning approach, enabling members to gain end-to-end development exposure."
+          ]
+        },
+        {
+          role: "Web Development Junior Committee",
+          period: "November 2025 – April 2026",
+          description: [
+            "Spearheaded the development of 3+ responsive event websites, optimizing for heavy traffic.",
+            "Contributed to the development of a Certificate distribution platform, enabling automated generation and delivery of certificates for large scale ACM events.",
+            "Collaborated with team to ensure smooth deployment and reliability during live events."
+          ]
+        }
       ]
     },
     {
-      company: "ACM Student Chapter, MUJ",
-      role: "Web Development Junior Committee",
-      location: "Manipal University Jaipur",
-      period: "November 2025 – Present",
-      description: [
-        "Spearheaded the development of 3+ responsive event websites, optimising for heavy traffic.",
-        "Collaborated with a 4-person team to implement new features."
+      company: "Freelance",
+      location: "Remote",
+      roles: [
+        {
+          role: "Freelance Full-Stack Developer",
+          period: "January 2026 – Present",
+          description: [
+            "Engineered a sales distribution platform for client, integrating order management and live salesman tracking that reduced administrative overhead by 40%.",
+            "Architected responsive admin dashboards using React and JavaScript to manage complex partner access controls."
+          ]
+        }
       ]
     },
   ]

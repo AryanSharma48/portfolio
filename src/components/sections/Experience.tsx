@@ -49,41 +49,61 @@ export default function Experience() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: index * 0.2 }}
-            className="group relative grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 p-6 md:p-12 rounded-2xl border border-accent/15 bg-[#1a1a1a] hover:bg-[#1e1e1e] hover:border-accent/40 transition-all duration-500 overflow-hidden"
+            className="group relative p-6 md:p-12 rounded-2xl border border-accent/15 bg-[#1a1a1a] hover:bg-[#1e1e1e] hover:border-accent/40 transition-all duration-500 overflow-hidden"
           >
-            {/* Left Column: Role & Company */}
-            <div className="flex flex-col justify-between h-full">
-              <div>
-                <h3 className="text-2xl md:text-3xl font-bold mb-2 transition-colors group-hover:text-white">
-                  {exp.role}
-                </h3>
-                <p className="text-xl text-white/80 font-medium group-hover:text-accent/90 transition-colors">
-                  {exp.company}
-                </p>
-              </div>
-              
-              <div className="mt-8 md:mt-12 space-y-1">
-                <p className="text-sm uppercase tracking-widest text-white/40">
-                  {exp.location}
-                </p>
-                <p className="text-sm uppercase tracking-widest text-white/40">
-                  {exp.period}
-                </p>
-              </div>
+            {/* Company Header */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 md:mb-10">
+              <h3 className="text-2xl md:text-3xl font-bold transition-colors group-hover:text-white">
+                {exp.company}
+              </h3>
+              <p className="text-sm uppercase tracking-widest text-white/40 mt-2 md:mt-0">
+                {exp.location}
+              </p>
             </div>
 
-            {/* Right Column: Description Bullets */}
+            {/* Roles Timeline */}
             <div className="relative">
-              <ul className="space-y-6">
-                {exp.description.map((item, i) => (
-                  <li key={i} className="flex gap-4 group/item">
-                    <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0 opacity-40 group-hover/item:opacity-100 transition-opacity" />
-                    <p className="text-white/50 group-hover/item:text-white/80 transition-colors leading-relaxed md:text-lg">
-                      {item}
-                    </p>
-                  </li>
-                ))}
-              </ul>
+              {exp.roles.map((role: { role: string; period: string; description: string[] }, rIndex: number) => (
+                <div key={rIndex} className="relative">
+                  {/* Promotion Arrow between roles */}
+                  {rIndex > 0 && (
+                    <div className="flex items-center gap-3 my-6 md:my-8">
+                      <div className="h-px flex-1 bg-gradient-to-r from-accent/30 to-transparent" />
+                      <span className="text-accent text-xs uppercase tracking-widest flex items-center gap-2">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                          <path d="M6 1L6 11M6 1L2 5M6 1L10 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        Promoted
+                      </span>
+                      <div className="h-px flex-1 bg-gradient-to-l from-accent/30 to-transparent" />
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 md:gap-8">
+                    {/* Role Info */}
+                    <div>
+                      <p className={`text-lg md:text-xl font-semibold mb-1 ${rIndex === 0 ? 'text-accent/90' : 'text-white/60'}`}>
+                        {role.role}
+                      </p>
+                      <p className="text-sm uppercase tracking-widest text-white/40">
+                        {role.period}
+                      </p>
+                    </div>
+
+                    {/* Description Bullets */}
+                    <ul className="space-y-4">
+                      {role.description.map((item: string, i: number) => (
+                        <li key={i} className="flex gap-4 group/item">
+                          <span className={`mt-2.5 w-1.5 h-1.5 rounded-full flex-shrink-0 transition-opacity ${rIndex === 0 ? 'bg-accent opacity-60 group-hover/item:opacity-100' : 'bg-white/30 opacity-40 group-hover/item:opacity-70'}`} />
+                          <p className="text-white/50 group-hover/item:text-white/80 transition-colors leading-relaxed md:text-lg">
+                            {item}
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
             </div>
 
             {/* Subtle Gradient Glow */}
