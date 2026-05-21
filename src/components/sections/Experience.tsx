@@ -1,9 +1,89 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { portfolioData } from "@/data/portfolio";
 
+function RoleDescription({ 
+  description, 
+  rIndex, 
+  isExpanded, 
+  onToggle 
+}: { 
+  description: string[], 
+  rIndex: number,
+  isExpanded: boolean,
+  onToggle: () => void
+}) {
+  return (
+    <div className="flex flex-col">
+      <ul className="space-y-4">
+        {/* First item - Always visible */}
+        {description.length > 0 && (
+          <li className="flex gap-4 group/item">
+            <span className={`mt-2.5 w-1.5 h-1.5 rounded-full flex-shrink-0 transition-opacity ${rIndex === 0 ? 'bg-accent opacity-60 group-hover/item:opacity-100' : 'bg-white/30 opacity-40 group-hover/item:opacity-70'}`} />
+            <p className="text-white/50 group-hover/item:text-white/80 transition-colors leading-relaxed md:text-lg">
+              {description[0]}
+            </p>
+          </li>
+        )}
+
+        {/* Desktop remaining items - Always visible on md+, hidden on mobile */}
+        {description.slice(1).map((item, i) => (
+          <li key={`desktop-${i}`} className="hidden md:flex gap-4 group/item">
+            <span className={`mt-2.5 w-1.5 h-1.5 rounded-full flex-shrink-0 transition-opacity ${rIndex === 0 ? 'bg-accent opacity-60 group-hover/item:opacity-100' : 'bg-white/30 opacity-40 group-hover/item:opacity-70'}`} />
+            <p className="text-white/50 group-hover/item:text-white/80 transition-colors leading-relaxed md:text-lg">
+              {item}
+            </p>
+          </li>
+        ))}
+      </ul>
+      
+      {/* Mobile remaining items - Animated accordion, hidden on md+ */}
+      {description.length > 1 && (
+        <div className="md:hidden">
+          <AnimatePresence initial={false}>
+            {isExpanded && (
+              <motion.ul 
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-4 overflow-hidden mt-4"
+              >
+                {description.slice(1).map((item, i) => (
+                  <li key={`mobile-${i}`} className="flex gap-4 group/item">
+                    <span className={`mt-2.5 w-1.5 h-1.5 rounded-full flex-shrink-0 transition-opacity ${rIndex === 0 ? 'bg-accent opacity-60 group-hover/item:opacity-100' : 'bg-white/30 opacity-40 group-hover/item:opacity-70'}`} />
+                    <p className="text-white/50 group-hover/item:text-white/80 transition-colors leading-relaxed md:text-lg">
+                      {item}
+                    </p>
+                  </li>
+                ))}
+              </motion.ul>
+            )}
+          </AnimatePresence>
+
+          <button 
+            onClick={onToggle}
+            className="self-start text-accent/80 hover:text-accent transition-colors text-xs font-semibold tracking-wider uppercase mt-5 flex items-center gap-2 py-1"
+          >
+            {isExpanded ? 'Show Less' : 'Read More'}
+            <svg 
+              width="10" height="10" viewBox="0 0 12 12" fill="none" 
+              className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+            >
+              <path d="M2 4L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Experience() {
+  const [expandedRoleId, setExpandedRoleId] = useState<string | null>(null);
+
   return (
     <section className="py-12 md:py-32 px-4 md:px-12 lg:px-24 w-full">
       <div className="mb-16">
@@ -91,16 +171,15 @@ export default function Experience() {
                     </div>
 
                     {/* Description Bullets */}
-                    <ul className="space-y-4">
-                      {role.description.map((item: string, i: number) => (
-                        <li key={i} className="flex gap-4 group/item">
-                          <span className={`mt-2.5 w-1.5 h-1.5 rounded-full flex-shrink-0 transition-opacity ${rIndex === 0 ? 'bg-accent opacity-60 group-hover/item:opacity-100' : 'bg-white/30 opacity-40 group-hover/item:opacity-70'}`} />
-                          <p className="text-white/50 group-hover/item:text-white/80 transition-colors leading-relaxed md:text-lg">
-                            {item}
-                          </p>
-                        </li>
-                      ))}
-                    </ul>
+                    <RoleDescription 
+                      description={role.description} 
+                      rIndex={rIndex} 
+                      isExpanded={expandedRoleId === `${index}-${rIndex}`}
+                      onToggle={() => {
+                        const id = `${index}-${rIndex}`;
+                        setExpandedRoleId(expandedRoleId === id ? null : id);
+                      }}
+                    />
                   </div>
                 </div>
               ))}

@@ -5,7 +5,7 @@ export default function MeshBackground() {
     <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
       {/* The base grid from globals.css style */}
       <div 
-        className="absolute inset-0 opacity-[0.2]"
+        className="absolute inset-0 opacity-[0.6]"
         style={{
           backgroundImage: `
             linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),

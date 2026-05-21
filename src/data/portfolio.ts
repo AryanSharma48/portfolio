@@ -61,6 +61,21 @@ export const portfolioData = {
   ],
   experience: [
     {
+      company: "TechX",
+      location: "United States · Remote",
+      roles: [
+        {
+          role: "Backend and Distributed Systems Intern",
+          period: "May 2026 – Present",
+          description: [
+            "Working as part of a mentor-guided engineering team on an AI knowledge archive platform focused on organizing and retrieving AI conversations across different topics.",
+            "Contributing to backend systems, API workflows, and browser-extension based data collection pipelines using Next.js and modern web technologies.",
+            "Involved in building scalable search and retrieval flows for archived AI interactions while collaborating in asynchronous development environments and weekly engineering scrums."
+          ]
+        }
+      ]
+    },
+    {
       company: "ACM Student Chapter, MUJ",
       location: "Jaipur, India",
       roles: [
