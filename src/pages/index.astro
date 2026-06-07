@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MeshBackground from '../components/ui/MeshBackground.astro';
+import HomeContainer from '../components/ui/HomeContainer';
+---
+
+<Layout 
+  title="Aryan Sharma" 
+  description="High-performance developer portfolio built with Astro & Framer Motion"
+>
+  <div class="relative w-full">
+    <MeshBackground />
+    <HomeContainer client:load />
+  </div>
+</Layout>

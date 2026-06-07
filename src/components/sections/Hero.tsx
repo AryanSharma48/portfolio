@@ -1,14 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-
-import MeshBackground from "@/components/ui/MeshBackground";
 
 export default function Hero() {
   return (
     <section className="relative h-screen w-full flex flex-col justify-center pl-4 md:pl-12 lg:pl-24 overflow-hidden">
-      <MeshBackground />
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
@@ -43,12 +39,10 @@ export default function Hero() {
         transition={{ duration: 2 }}
         className="absolute inset-0 w-full h-full z-0 block md:hidden pointer-events-none brightness-50 mix-blend-luminosity"
       >
-        <Image 
+        <img 
           src="/profile.jpg" 
           alt="Background Texture" 
-          fill 
-          className="object-cover object-center grayscale"
-          priority
+          className="absolute inset-0 w-full h-full object-cover object-center grayscale"
         />
         {/* Falloff gradient overlay to blend into the darkness smoothly */}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80" />
@@ -62,12 +56,10 @@ export default function Hero() {
         className="absolute top-[15%] right-[5%] w-[35vh] h-[45vh] lg:w-[40vh] lg:h-[50vh] border-[1px] border-accent/20 hidden md:block overflow-hidden pointer-events-auto z-10"
         data-cursor-hover
       >
-        <Image 
+        <img 
           src="/profile.jpg" 
           alt="Aryan Sharma" 
-          fill 
-          className="object-cover scale-105 hover:scale-100 transition-transform duration-700"
-          priority
+          className="absolute inset-0 w-full h-full object-cover scale-105 hover:scale-100 transition-transform duration-700"
         />
       </motion.div>
     </section>

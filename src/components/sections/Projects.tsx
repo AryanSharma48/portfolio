@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { portfolioData } from "@/data/portfolio";
-import Image from "next/image";
+
 
 export default function Projects() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -52,11 +52,10 @@ const ProjectCard = ({ project, index }: { project: ProjectType, index: number }
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <motion.div style={{ y: yPos }} className="absolute inset-[-20%] scale-[1.0]">
-          <Image 
+          <img 
             src={project.image} 
             alt={project.title}
-            fill
-            className="object-cover transition-transform duration-700 ease-out md:group-hover:scale-105 filter md:grayscale group-hover:grayscale-0"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out md:group-hover:scale-105 filter md:grayscale group-hover:grayscale-0"
           />
         </motion.div>
         
