@@ -1,0 +1,332 @@
+# Next.js to Astro Migration Plan
+
+This plan maps the migration of the high-performance portfolio website from Next.js 16 to Astro. The goal is to preserve the exact design, typography, spacing, scroll logic, and animations of the website while taking advantage of Astro's island architecture and performance optimization.
+
+## Project Type
+- **Type**: WEB
+- **Primary Agent**: [frontend-specialist](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/.agent/agents/frontend-specialist.md)
+- **Skills Loaded**: `clean-code`, `react-best-practices`, `frontend-design`
+
+---
+
+## Codebase Migration Map
+
+Here is the file-by-file mapping representing compatibility, migration strategy, and required adjustments to ensure the website is not changed a single hair.
+
+| Next.js File Path | Astro File Path | Action | Migration Complexity & Compatibility Notes |
+| :--- | :--- | :--- | :--- |
+| [package.json](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/package.json) | [package.json](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/package.json) | **[MODIFY]** | Replace Next.js dependencies with Astro dependencies (`astro`, `@astrojs/react`, `@tailwindcss/vite`). Add `@fontsource` packages. Keep Framer Motion and Lenis. |
+| [tsconfig.json](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/tsconfig.json) | [tsconfig.json](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/tsconfig.json) | **[MODIFY]** | Extend `"astro/tsconfigs/strict"` or `"base"`. Update typescript inclusions and keep the `@/*` path alias mapping. |
+| [eslint.config.mjs](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/eslint.config.mjs) | [eslint.config.mjs](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/eslint.config.mjs) | **[MODIFY]** | Swap out `eslint-config-next` rules for `eslint-plugin-astro` configurations. |
+| [postcss.config.mjs](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/postcss.config.mjs) | *(None)* | **[DELETE]** | Incompatible/unnecessary. Tailwind CSS v4 in Astro is loaded directly inside Vite (`astro.config.mjs`) using the official `@tailwindcss/vite` plugin. |
+| [next.config.ts](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/next.config.ts) | *(None)* | **[DELETE]** | Incompatible. |
+| [next-env.d.ts](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/next-env.d.ts) | *(None)* | **[DELETE]** | Incompatible. |
+| *(None)* | [astro.config.mjs](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/astro.config.mjs) | **[NEW]** | Configure Astro in static SSG mode, add `@astrojs/react` integration, and Tailwind CSS v4 Vite plugin. |
+| *(None)* | [src/env.d.ts](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/env.d.ts) | **[NEW]** | Standard Astro types file for typescript compatibility. |
+| [src/app/globals.css](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/app/globals.css) | [src/styles/globals.css](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/styles/globals.css) | **[MODIFY]** | Keep Tailwind v4 `@theme` layers. Relocate to styles directory and remove the obsolete Next.js dev overlay selector (`nextjs-portal`). Update font families to link directly to Fontsource. |
+| [src/app/layout.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/app/layout.tsx) | [src/layouts/Layout.astro](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/layouts/Layout.astro) | **[NEW]** | Convert layout to a native `.astro` component. Setup Fontsource imports, `<head>`, metadata, and initialize vanilla Lenis script (matching original options) to eliminate React hydration wrapper. |
+| [src/app/page.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/app/page.tsx) | [src/pages/index.astro](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/pages/index.astro) | **[NEW]** | Render page elements in Astro. Stitch sections together using Astro layout. Hydrate interactive React components using appropriate client directives (`client:load`, `client:visible`, `client:only`). |
+| [src/app/icon.png](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/app/icon.png) | [public/favicon.png](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/public/favicon.png) | **[MODIFY]** | Relocate layout favicon to Astro public folder. |
+| [src/data/portfolio.ts](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/data/portfolio.ts) | [src/data/portfolio.ts](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/data/portfolio.ts) | **[KEEP]** | Pure TypeScript data. Fully compatible with Astro out of the box. |
+| [src/components/ui/SmoothScroll.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/ui/SmoothScroll.tsx) | *(None)* | **[DELETE]** | Replaced entirely by a script-based Lenis integration inside [Layout.astro](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/layouts/Layout.astro) to eliminate React hydration wrapper wrapper. |
+| [src/components/ui/MeshBackground.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/ui/MeshBackground.tsx) | [src/components/ui/MeshBackground.astro](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/ui/MeshBackground.astro) | **[NEW]** | Convert to native Astro component (zero-JS). The CSS linear-gradient grid background builds statically, saving runtime hydration. |
+| [src/components/ui/CustomCursor.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/ui/CustomCursor.tsx) | [src/components/ui/CustomCursor.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/ui/CustomCursor.tsx) | **[MODIFY]** | Keep React & Framer Motion. Needs `<CustomCursor client:only="react" />` during assembly, since it directly listens to window mouse events during setup. |
+| [src/components/ui/ScrollProgress.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/ui/ScrollProgress.tsx) | [src/components/ui/ScrollProgress.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/ui/ScrollProgress.tsx) | **[MODIFY]** | Keep React & Framer Motion. Hydrate with `<ScrollProgress client:load />`. |
+| [src/components/ui/ScrollingMarquee.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/ui/ScrollingMarquee.tsx) | [src/components/ui/ScrollingMarquee.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/ui/ScrollingMarquee.tsx) | **[MODIFY]** | Keep React & Framer Motion. Hydrate with `<ScrollingMarquee client:visible />` to start marquee spring transforms when visible. |
+| [src/components/sections/Hero.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/sections/Hero.tsx) | [src/components/sections/Hero.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/sections/Hero.tsx) | **[MODIFY]** | Replace `"next/image"` with Astro's `<Image />` component. Keep Framer Motion entrance animations. Hydrate with `<Hero client:load />`. |
+| [src/components/sections/About.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/sections/About.tsx) | [src/components/sections/About.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/sections/About.tsx) | **[MODIFY]** | Keep React & Framer Motion. Hydrate with `<About client:visible />` to ensure scroll progress word-fade animation activates. |
+| [src/components/sections/Experience.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/sections/Experience.tsx) | [src/components/sections/Experience.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/sections/Experience.tsx) | **[MODIFY]** | Keep React & Framer Motion. Hydrate with `<Experience client:visible />` to ensure mobile accordion expansion works seamlessly. |
+| [src/components/sections/Projects.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/sections/Projects.tsx) | [src/components/sections/Projects.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/sections/Projects.tsx) | **[MODIFY]** | Replace `"next/image"` with Astro's `<Image />` component. Keep Framer Motion. Hydrate with `<Projects client:visible />` to ensure card parallax transforms are initialized. |
+| [src/components/sections/Contact.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/sections/Contact.tsx) | [src/components/sections/Contact.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/sections/Contact.tsx) | **[MODIFY]** | Keep React & Framer Motion. Hydrate with `<Contact client:visible />` to run flip-text hover animations. |
+
+---
+
+## Detailed Migration Strategy
+
+### 1. Style Mapping (Tailwind CSS v4 & Fonts)
+In Next.js, fonts are loaded via `next/font/google` and set as CSS variables:
+```typescript
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
+```
+In Astro, we will use `@fontsource/inter` and `@fontsource/syne`.
+In [Layout.astro](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/layouts/Layout.astro):
+```astro
+---
+import '@fontsource/inter';
+import '@fontsource/syne';
+import '../styles/globals.css';
+---
+```
+In [globals.css](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/styles/globals.css), we update our font theme configurations directly:
+```css
+@theme {
+  --color-background: #0a0a0a;
+  --color-foreground: #fafafa;
+  --color-accent: #ccff00;
+  
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Syne", sans-serif;
+}
+```
+This maps the fonts directly to the classes without needing to carry over wrapper classes (`${inter.variable} ${syne.variable}`) on the `<html>` and `<body>` tags.
+
+### 2. Smooth Scrolling (1-1 Lenis Realization)
+To avoid wrapping the entire application inside hydrated React islands, we migrate the Lenis configuration from React to native JavaScript in the layout.
+Original Next.js Lenis config:
+```tsx
+<ReactLenis root options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}>
+  {children}
+</ReactLenis>
+```
+Astro 1-1 Layout Script realization (inside [Layout.astro](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/layouts/Layout.astro)):
+```html
+<script>
+  import Lenis from "lenis";
+
+  // Match original options 1-1
+  const lenis = new Lenis({
+    lerp: 0.1,
+    duration: 1.5,
+    smoothWheel: true,
+  });
+
+  function raf(time: number) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+</script>
+```
+
+### 3. Static MeshBackground Component conversion
+[MeshBackground.tsx](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/ui/MeshBackground.tsx) does not contain interactive state or hooks. We rewrite it into a native `.astro` component to compile directly to static HTML with zero client-side JavaScript.
+[MeshBackground.astro](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/components/ui/MeshBackground.astro) format:
+```astro
+---
+---
+<div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+  <div 
+    class="absolute inset-0 opacity-[0.6]"
+    style="
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: radial-gradient(circle at center, black, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
+    "
+  />
+  <div class="absolute inset-0 bg-background/50 backdrop-blur-[1px]" />
+</div>
+```
+
+### 4. Image Elements (Next.js vs Astro)
+Next.js uses `<Image fill className="object-cover" />` which appends position: absolute styles under the hood. In Astro, we replace `next/image` with `astro:assets` `<Image>` and explicitly write standard CSS layout classes:
+```astro
+import { Image } from 'astro:assets';
+import profileImage from '../../public/profile.jpg'; // or public folder reference
+
+<Image 
+  src={profileImage} 
+  alt="Aryan Sharma" 
+  class="absolute inset-0 w-full h-full object-cover" 
+/>
+```
+
+---
+
+## Proposed Changes
+
+### Configuration Components
+
+#### [NEW] [astro.config.mjs](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/astro.config.mjs)
+A new Astro configuration setting up Vite + Tailwind CSS v4 and the React integration wrapper.
+```javascript
+import { defineConfig } from 'astro/config';
+import react from '@astrojs/react';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+  output: 'static', // Build as fully static SSG site (matches Next.js export)
+  integrations: [react()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
+});
+```
+
+#### [MODIFY] [package.json](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/package.json)
+Update dependency mappings:
+```json
+{
+  "dependencies": {
+    "astro": "^4.16.0",
+    "@astrojs/react": "^3.6.0",
+    "@fontsource/inter": "^5.0.0",
+    "@fontsource/syne": "^5.0.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.38.0",
+    "lenis": "^1.3.21",
+    "lucide-react": "^1.0.1",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "tailwind-merge": "^3.5.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}
+```
+
+#### [MODIFY] [tsconfig.json](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/tsconfig.json)
+Swap compile targets:
+```json
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+#### [DELETE] [next.config.ts](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/next.config.ts)
+#### [DELETE] [postcss.config.mjs](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/postcss.config.mjs)
+#### [DELETE] [next-env.d.ts](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/next-env.d.ts)
+
+---
+
+### Layouts & Pages
+
+#### [NEW] [Layout.astro](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/layouts/Layout.astro)
+Replaces `layout.tsx` to handle page wrappers, fonts, styles, and Lenis smooth scrolling.
+```astro
+---
+import '@fontsource/inter';
+import '@fontsource/syne';
+import '../styles/globals.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body class="bg-background text-foreground min-h-screen flex flex-col font-sans overflow-x-hidden">
+    <slot />
+
+    <script>
+      import Lenis from "lenis";
+      const lenis = new Lenis({
+        lerp: 0.1,
+        duration: 1.5,
+        smoothWheel: true,
+      });
+
+      function raf(time: number) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    </script>
+  </body>
+</html>
+```
+
+#### [NEW] [index.astro](file:///c:/Users/Aryan%20Sharma/Desktop/portfolio/src/pages/index.astro)
+Replaces `page.tsx`. Stitches interactive React components using island hydration.
+```astro
+---
+import Layout from '../layouts/Layout.astro';
+import CustomCursor from '../components/ui/CustomCursor';
+import ScrollProgress from '../components/ui/ScrollProgress';
+import Hero from '../components/sections/Hero';
+import Experience from '../components/sections/Experience';
+import ScrollingMarquee from '../components/ui/ScrollingMarquee';
+import About from '../components/sections/About';
+import Projects from '../components/sections/Projects';
+import Contact from '../components/sections/Contact';
+---
+
+<Layout 
+  title="Aryan Sharma" 
+  description="High-performance developer portfolio built with Astro & Framer Motion"
+>
+  <main class="relative w-full selection:bg-accent selection:text-black">
+    {/* Custom cursor (client-only as it binds to window on creation) */}
+    <CustomCursor client:only="react" />
+    
+    {/* Page-wide scroll progress indicator */}
+    <ScrollProgress client:load />
+    
+    {/* Pinned Hero Section */}
+    <section class="sticky top-0 h-screen w-full overflow-hidden">
+      <Hero client:load />
+    </section>
+
+    {/* Scroll-lifted content card container */}
+    <div
+      id="content-card"
+      class="relative z-20 bg-[#202020] shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-t border-white/5"
+      style="border-top-left-radius: 3rem; border-top-right-radius: 3rem;"
+    >
+      <Experience client:visible />
+      <ScrollingMarquee client:visible />
+      <About client:visible />
+      <Projects client:visible />
+      <Contact client:visible />
+    </div>
+  </main>
+</Layout>
+
+<script>
+  // Setup the lifted content card y-translate transition manually to match 1-1
+  // with the framer motion scroll hooks used in next.js, maintaining maximum performance.
+  const contentCard = document.getElementById('content-card');
+  if (contentCard) {
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      // Interpolate: starts at 10px y-offset at scrollY=0, catches up to 0px at scrollY=100
+      const cardY = Math.max(0, 10 - (scrollY * 0.1));
+      contentCard.style.transform = `translateY(${cardY}px)`;
+    });
+  }
+</script>
+```
+
+---
+
+## Verification Plan
+
+### Automated Tests
+Once the migration is complete, we run:
+```bash
+# Verify project compiles successfully in Astro
+npm run build
+
+# Audit accessibility, contrast and performance
+python .agent/scripts/checklist.py .
+```
+
+### Manual Verification
+- Deploy build to a local preview server (`npm run preview`) to inspect layout spacing.
+- Compare transition performance between original Next.js container translation and updated Astro scroll event layout script.
+- Ensure Framer Motion springs in the scroll marquee and word-fading on about section run at identical frame rates and triggers.
