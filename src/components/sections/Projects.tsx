@@ -55,7 +55,7 @@ const ProjectCard = ({ project, index }: { project: ProjectType, index: number }
           <img 
             src={project.image} 
             alt={project.title}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out md:group-hover:scale-105 filter md:grayscale group-hover:grayscale-0"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out md:group-hover:scale-105"
           />
         </motion.div>
         

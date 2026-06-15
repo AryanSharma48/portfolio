@@ -99,19 +99,5 @@ export const portfolioData = {
         }
       ]
     },
-    {
-      company: "Freelance",
-      location: "Remote",
-      roles: [
-        {
-          role: "Freelance Full-Stack Developer",
-          period: "January 2026 – Present",
-          description: [
-            "Engineered a sales distribution platform for client, integrating order management and live salesman tracking that reduced administrative overhead by 40%.",
-            "Architected responsive admin dashboards using React and JavaScript to manage complex partner access controls."
-          ]
-        }
-      ]
-    },
   ]
 };

@@ -13,6 +13,10 @@ export default function About() {
 
   const words = portfolioData.about.bio.split(" ");
 
+  // Flatten all chars with their global index for per-letter range calculation
+  const totalChars = words.reduce((sum, w) => sum + w.length, 0);
+  let charIndex = 0;
+
   return (
     <section 
       ref={containerRef}
@@ -23,11 +27,21 @@ export default function About() {
         <h2 className="font-sans text-xs uppercase tracking-widest text-accent mb-8 md:mb-12">
           (01) The Ethos
         </h2>
-        <p className="font-display text-3xl md:text-5xl lg:text-7xl leading-[1.1] flex flex-wrap gap-x-2 md:gap-x-4 lg:gap-x-5">
-          {words.map((word, i) => {
-            const start = i / words.length;
-            const end = start + (1 / words.length);
-            return <Word key={i} word={word} progress={scrollYProgress} range={[start, end]} />;
+        <p className="font-display text-2xl md:text-4xl lg:text-5xl leading-[1.1] flex flex-wrap gap-x-2 md:gap-x-3 lg:gap-x-4">
+          {words.map((word, wi) => {
+            const letters = word.split("").map((char, li) => {
+              const idx = charIndex++;
+              const start = idx / totalChars;
+              const end = (idx + 1) / totalChars;
+              return (
+                <Letter key={li} char={char} progress={scrollYProgress} range={[start, end]} />
+              );
+            });
+            return (
+              <span key={wi} className="relative inline-block mt-2">
+                {letters}
+              </span>
+            );
           })}
         </p>
       </div>
@@ -35,11 +49,11 @@ export default function About() {
   );
 }
 
-const Word = ({ word, progress, range }: { word: string, progress: MotionValue<number>, range: [number, number] }) => {
-  const opacity = useTransform(progress, range, [0.1, 1]);
+const Letter = ({ char, progress, range }: { char: string, progress: MotionValue<number>, range: [number, number] }) => {
+  const opacity = useTransform(progress, range, [0.08, 1]);
   return (
-    <motion.span style={{ opacity }} className="relative inline-block mt-2">
-      {word}
+    <motion.span style={{ opacity }} className="inline-block">
+      {char}
     </motion.span>
   );
 };
